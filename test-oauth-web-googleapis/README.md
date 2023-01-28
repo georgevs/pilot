@@ -2,7 +2,7 @@
 
 ## Summary
 
-Base setup for read account GMail
+Client side web app calling Google API client library
 
 ## Install live certificates
 ```
