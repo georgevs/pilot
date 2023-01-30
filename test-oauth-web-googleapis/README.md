@@ -7,8 +7,16 @@ Client side web app calling Google API client library
 ## Install live certificates
 ```
 scp opx:~/ws-archive/certs.tar.gz.bin ~/ws-archive/certs.tar.gz.bin
+openssl enc -aes-128-cbc -pbkdf2 -salt -d -in ~/ws-archive/certs.tar.gz.bin | tar xzv
+```
 
-openssl enc -aes-128-cbc -pbkdf2 -salt -d -in ~/ws-archive/certs.tar.gz.bin | tar xzv --directory ./
+## Manage secrets
+```
+tar czv secrets | openssl enc -aes-128-cbc -pbkdf2 -salt -out ~/ws-archive/test-oauth-pilot.tar.gz.enc
+scp ~/ws-archive/test-oauth-pilot.tar.gz.enc opx:~/ws-archive/test-oauth-pilot.tar.gz.enc
+
+scp opx:~/ws-archive/test-oauth-pilot.tar.gz.enc ~/ws-archive/test-oauth-pilot.tar.gz.enc
+openssl enc -d -aes-128-cbc -pbkdf2 -salt -in ~/ws-archive/test-oauth-pilot.tar.gz.enc | tar xzv
 ```
 
 ## Setup DNS
