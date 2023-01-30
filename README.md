@@ -18,6 +18,10 @@
 Four options might be available:
 - Server side web app calling Google API client library
 - Server side web app calling Google API REST directly
+  - See https://developers.google.com/identity/protocols/oauth2/web-server
+  - See https://developers.google.com/gmail/api/quickstart/nodejs
+  - See https://developers.google.com/identity/openid-connect/openid-connect#server-flow
 - Client side web app calling Google API client library
+  - See https://developers.google.com/gmail/api/quickstart/js
 - Client side web app calling Google API REST directly
 
