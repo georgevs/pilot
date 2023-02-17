@@ -4,6 +4,7 @@
 
 - [Playground](https://developers.google.com/oauthplayground)
 - [GMail API reference](https://developers.google.com/gmail/api/reference/rest)
+- [Deimto: google oauth with curl](../../../youtube/deimto/google-oauth-curl/README.md)
 
 ## Select and authorize APIs
 ```
@@ -418,4 +419,27 @@ Content-type: application/json; charset=UTF-8
     ]
   }
 }
+```
+
+## List Google drive files
+```
+GET /drive/v3/files HTTP/1.1
+Authorization: Bearer ya29.a0A...0163
+
+HTTP/1.1 200 OK
+{
+  "files": [
+    {
+      "mimeType": "application/vnd.google-apps.spreadsheet", 
+      "kind": "drive#file", 
+      "id": "1A8ee1ZRvWl-R8LSG5JXfSR9q9B9eHo9Diug6ygQHYZY", 
+      "name": "Balances"
+    }, 
+    ...
+```
+## Export Google doc spreadsheet in ODS file format
+See [Google: export formats reference](https://developers.google.com/drive/api/guides/ref-export-formats)
+```
+GET /drive/v3/files/1A8ee1ZRvWl-R8LSG5JXfSR9q9B9eHo9Diug6ygQHYZY/export?mimeType=application/x-vnd.oasis.opendocument.spreadsheet HTTP/1.1
+Authorization: Bearer ya29.a0AV...163
 ```

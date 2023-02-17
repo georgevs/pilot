@@ -24,4 +24,3 @@ Four options might be available:
 - Client side web app calling Google API client library
   - See https://developers.google.com/gmail/api/quickstart/js
 - Client side web app calling Google API REST directly
-
