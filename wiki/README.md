@@ -2,16 +2,21 @@
 
 ## References
 
-- [How to Store JWT in a Cookie](https://medium.com/@ryanchenkie_40935/react-authentication-how-to-store-jwt-in-a-cookie-346519310e81)
-- [How To Use JWTs in Express](https://www.digitalocean.com/community/tutorials/nodejs-jwt-expressjs)
-- [Okta: Cookies vs tokens](https://developer.okta.com/blog/2022/02/08/cookies-vs-tokens)
-- [JWT best practices](https://hasura.io/blog/best-practices-of-using-jwt-with-graphql/)
-- [OWASP: JWT cheatsheet](https://cheatsheetseries.owasp.org/cheatsheets/JSON_Web_Token_for_Java_Cheat_Sheet.html)
-- [OWASP: Conten Security Policy](https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html)
 - [Auth0: Token best practices](https://auth0.com/docs/secure/tokens/token-best-practices)
 - [Auth0: Token storage](https://auth0.com/docs/secure/security-guidance/data-security/token-storage)
-- [Express: sessions](https://github.com/expressjs/session)
 - [Curity: API Security](https://curity.io/resources/api-security)
+- [DigitalOcean: How To Use JWTs in Express](https://www.digitalocean.com/community/tutorials/nodejs-jwt-expressjs)
+- [Express: sessions](https://github.com/expressjs/session)
+- [Hasura: JWT best practices](https://hasura.io/blog/best-practices-of-using-jwt-with-graphql/)
+- [Medium: How to Store JWT in a Cookie](https://medium.com/@ryanchenkie_40935/react-authentication-how-to-store-jwt-in-a-cookie-346519310e81)
+- [Okta: Cookies vs tokens](https://developer.okta.com/blog/2022/02/08/cookies-vs-tokens)
+- [OWASP: Component analysis](https://owasp.org/www-community/Component_Analysis)
+- [OWASP: Conten Security Policy](https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html)
+- [OWASP: CSRF prevention cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html)
+- [OWASP: JWT cheatsheet](https://cheatsheetseries.owasp.org/cheatsheets/JSON_Web_Token_for_Java_Cheat_Sheet.html)
+- [Snyk: advisor check npm package health](https://snyk.io/advisor/)
+- [Snyk: advisor code examples](https://snyk.io/advisor/code/javascript/popular)
+- [Snyk: open source vulnerability database](https://security.snyk.io)
 
 ## JWT validation
 See [Auth0: Token best practices](https://auth0.com/docs/secure/tokens/token-best-practices) for details.
