@@ -36,5 +36,4 @@ dig spamfro.xyz | grep '^spamfro.xyz'
 ## Run the app
 ```
 npx http-server ./app -c-1 --ssl -a spamfro.xyz -p 3443 --cert ./certs/cert.pem --key ./certs/cert-key-nopassword.pem
-
 ```

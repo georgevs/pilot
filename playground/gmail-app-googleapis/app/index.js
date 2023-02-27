@@ -24,6 +24,7 @@ class App {
     this.ui = new Ui(document.body);
     this.ui.addEventListener('ui:request-authenticate', this.handleUiRequestAuthenticate.bind(this));
     this.ui.addEventListener('ui:request-labels', this.handleUiRequestLabels.bind(this));
+    this.ui.addEventListener('ui:request-messages', this.handleUiRequestMessages.bind(this));
 
     this.services.googleApi.loadClient()
       .then(this.handleLoaded.bind(this));
@@ -38,7 +39,7 @@ class App {
       .then(this.handleAuthenticateResponse.bind(this));
   }
   handleAuthenticateResponse(tokenResponse) {
-    this.model.isAuthenticated = tokenResponse && tokenResponse.access_token;
+    this.model.isAuthenticated = tokenResponse && tokenResponse.access_token !== null;
     this.model.error = tokenResponse ? tokenResponse.error : 'null';
     this.ui.render(this.model);
   }
@@ -48,6 +49,14 @@ class App {
   }
   handleLabels(labels) {
     this.model.labels = labels;
+    this.ui.render(this.model);
+  }
+  handleUiRequestMessages() {
+    this.services.googleApi.requestMessages()
+      .then(this.handleMessages.bind(this));
+  }
+  handleMessages(messages) {
+    this.model.messages = messages;
     this.ui.render(this.model);
   }
 }
@@ -79,15 +88,26 @@ class Ui extends UiElement {
     });
 
     this.listLabels = new UiLabels('.list-labels');
+
+    this.btnMessages = new UiElement('.btn-messages');
+    this.btnMessages.addEventListener('click', () => {
+      this.dispatchEvent(new CustomEvent('ui:request-messages'));
+    });
+
+    this.listMessages = new UiMessages('.list-messages');
+
     this.alertDanger = new UiAlert('.alert-danger');
   }
-  render({ isLoaded, isAuthenticated, labels, error }) {
+  render({ isLoaded, isAuthenticated, labels, messages, error }) {
     this.btnAuthenticate.toggleClass(['d-none'], !isLoaded || isAuthenticated);
     this.btnLabels.toggleClass(['d-none'], !isAuthenticated);
+    this.btnMessages.toggleClass(['d-none'], !isAuthenticated);
     this.listLabels.toggleClass(['d-none'], !labels);
+    this.listMessages.toggleClass(['d-none'], !messages);
     this.alertDanger.toggleClass(['d-none'], !error);
 
     this.listLabels.render({ labels });
+    this.listMessages.render({ messages });
     this.alertDanger.render({ error });
   }
 }
@@ -130,6 +150,35 @@ class UiLabelItem extends UiElement {
   }
 }
 
+class UiMessages extends UiElement {
+  constructor(sel, parent) {
+    super(sel, parent);
+  }
+  render({ messages }) {
+    this.el.querySelectorAll(':scope > li').forEach(li => { li.remove() });
+    if (messages) {
+      messages.forEach(message => {
+        new UiMessageItem(this.el.appendChild(UiMessageItem.createElement()))
+          .render(message);
+      });
+    }
+  }
+}
+
+class UiMessageItem extends UiElement {
+  static createElement() {
+    const el = document.createElement('li');
+    el.classList.add('list-group-item');
+    return el;
+  }
+  constructor(sel, parent) {
+    super(sel, parent);
+  }
+  render({ id, threadId }) {
+    this.el.textContent = `${threadId}/${id}`;
+  }
+}
+
 //----------------------------------------------------------------------------------------
 class Services {
   constructor(config) {
@@ -159,6 +208,12 @@ class GoogleAPI {
     return new Promise((resolve, reject) => {
       this.client.gmail.users.labels.list({ userId: 'me' })
         .then(({ result: { labels } }) => { resolve(labels) }, reject);
+    });
+  }
+  requestMessages() {
+    return new Promise((resolve, reject) => {
+      this.client.gmail.users.messages.list({ userId: 'me' })
+        .then(({ result: { messages } }) => { resolve(messages) }, reject);
     });
   }
 }
