@@ -121,10 +121,24 @@ class UiAlert extends UiElement {
   }
 }
 
-class UiLabels extends UiElement {
+class UiList extends UiElement {
   constructor(sel, parent) {
     super(sel, parent);
   }
+}
+
+class UiListItem extends UiElement {
+  static createElement() {
+    const el = document.createElement('li');
+    el.classList.add('list-group-item');
+    return el;
+  }
+  constructor(sel, parent) {
+    super(sel, parent);
+  }
+}
+
+class UiLabels extends UiList {
   render({ labels }) {
     this.el.querySelectorAll(':scope > li').forEach(li => { li.remove() });
     if (labels) {
@@ -136,24 +150,14 @@ class UiLabels extends UiElement {
   }
 }
 
-class UiLabelItem extends UiElement {
-  static createElement() {
-    const el = document.createElement('li');
-    el.classList.add('list-group-item');
-    return el;
-  }
-  constructor(sel, parent) {
-    super(sel, parent);
-  }
+class UiLabelItem extends UiListItem {
+
   render({ name }) {
     this.el.textContent = name.toString();
   }
 }
 
-class UiMessages extends UiElement {
-  constructor(sel, parent) {
-    super(sel, parent);
-  }
+class UiMessages extends UiList {
   render({ messages }) {
     this.el.querySelectorAll(':scope > li').forEach(li => { li.remove() });
     if (messages) {
@@ -165,15 +169,7 @@ class UiMessages extends UiElement {
   }
 }
 
-class UiMessageItem extends UiElement {
-  static createElement() {
-    const el = document.createElement('li');
-    el.classList.add('list-group-item');
-    return el;
-  }
-  constructor(sel, parent) {
-    super(sel, parent);
-  }
+class UiMessageItem extends UiListItem {
   render({ id, threadId }) {
     this.el.textContent = `${threadId}/${id}`;
   }
@@ -210,9 +206,10 @@ class GoogleAPI {
         .then(({ result: { labels } }) => { resolve(labels) }, reject);
     });
   }
-  requestMessages() {
+  requestMessages(options) {
+    const { labelIds } = options || {};
     return new Promise((resolve, reject) => {
-      this.client.gmail.users.messages.list({ userId: 'me' })
+      this.client.gmail.users.messages.list({ userId: 'me', labelIds })
         .then(({ result: { messages } }) => { resolve(messages) }, reject);
     });
   }

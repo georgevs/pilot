@@ -10,6 +10,9 @@
 - [GMail API reference](https://developers.google.com/gmail/api/reference/rest)
 - [GMail API quickstart](https://developers.google.com/gmail/api/quickstart/js)
 
+- [Google GitHib python samples](https://github.com/googleworkspace/python-samples)
+- [Google GitHub node samples](https://github.com/googleworkspace/node-samples)
+
 ## References (Spam Frontline Pilot)
 - [Home](https://console.cloud.google.com/home/dashboard?project=spam-frontline-pilot)
 
